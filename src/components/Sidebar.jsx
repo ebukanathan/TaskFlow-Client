@@ -1,8 +1,8 @@
 import React from "react";
 
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const Sidebar = ({ activeTab, setActiveTab, handleLogout }) => {
   return (
-    <aside className="w-64  bg-slate-900 text-white flex flex-col p-6 ">
+    <aside className="relative not-last:w-64  bg-slate-900 text-white flex flex-col p-6 ">
       <h1 className="text-2xl font-bold mb-10">TaskFlow</h1>
 
       <nav className="space-y-3">
@@ -32,6 +32,12 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           ✅ Tasks
         </button>
       </nav>
+      <button
+        onClick={handleLogout}
+        className="w-1/2 p-3 bg-red-500 rounded-md absolute bottom-0 text-white hover:bg-red-400"
+      >
+        Log out
+      </button>
     </aside>
   );
 };

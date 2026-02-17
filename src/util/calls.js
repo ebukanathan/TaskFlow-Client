@@ -23,4 +23,29 @@ const postItemToDb = async (endpoint, data) => {
   }
 };
 
-export { getItemFromDb, postItemToDb };
+const getItemByIdFromDb = async (endpoint, id) => {
+  try {
+    const response = await api.get(`${endpoint}/${id}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data by ID:", error);
+    throw error;
+  }
+};
+
+const postItemByIdToDb = async (endpoint, id, data) => {
+  try {
+    const response = await api.post(`${endpoint}/${id}`, data, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error posting data by ID:", error);
+    throw error;
+  }
+};
+
+export { getItemFromDb, postItemToDb, getItemByIdFromDb, postItemByIdToDb };

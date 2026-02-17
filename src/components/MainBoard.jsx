@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AddProjectModal from "./AddProject";
 import { getItemFromDb } from "../util/calls";
 
@@ -17,7 +18,7 @@ const MainBoard = ({ activeTab, user }) => {
     };
 
     getProjects();
-  }, [projects]);
+  }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(null);
 
@@ -46,7 +47,9 @@ const MainBoard = ({ activeTab, user }) => {
               {/* <ProjectCard title="Website Redesign" status="In Progress" />
               <ProjectCard title="Mobile App" status="Completed" /> */}
               {projects?.map((item, index) => (
-                <ProjectCard title={item.name} key={index} />
+                <Link to={`/projects/${item.id}`} key={index}>
+                  <ProjectCard title={item.name} />
+                </Link>
               ))}
             </div>
           </div>

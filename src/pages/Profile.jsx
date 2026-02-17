@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import api from "../api/axios.js";
-
+import { logout } from "../api/Auth.js";
 import { useNavigate } from "react-router-dom";
+
 import Sidebar from "../components/Sidebar.jsx";
 import MainBoard from "../components/MainBoard.jsx";
 
@@ -10,7 +11,12 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("projects");
 
-  const navigate = useNavigate;
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    // await logout();
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -40,7 +46,11 @@ function Profile() {
 
   return (
     <div className="flex min-h-screen ">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        handleLogout={handleLogout}
+      />
       <MainBoard activeTab={activeTab} user={user} />
     </div>
   );
