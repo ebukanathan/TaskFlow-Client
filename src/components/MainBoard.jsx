@@ -5,13 +5,18 @@ import { getItemFromDb } from "../util/calls";
 
 const MainBoard = ({ activeTab, user }) => {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProjects = async () => {
       try {
         const res = await getItemFromDb("/projects");
+        if (!res) {
+          console.log("no data");
+        }
         // setProjects(res);
         setProjects(res);
+        setLoading(true);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -24,9 +29,9 @@ const MainBoard = ({ activeTab, user }) => {
 
   return (
     <div className="flex flex-col flex-1">
-      <div className="flex justify-end item-center shadow-md mb-6 p-3">
+      {/* <div className="flex justify-end item-center shadow-md mb-6 p-3">
         {user?.name || "Guest"}
-      </div>
+      </div> */}
       <main className="flex-1 p-8 overflow-y-auto">
         {activeTab === "projects" && (
           <div className="flex flex-col">
@@ -46,11 +51,15 @@ const MainBoard = ({ activeTab, user }) => {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {/* <ProjectCard title="Website Redesign" status="In Progress" />
               <ProjectCard title="Mobile App" status="Completed" /> */}
-              {projects?.map((item, index) => (
-                <Link to={`/projects/${item.id}`} key={index}>
-                  <ProjectCard title={item.name} />
-                </Link>
-              ))}
+              {loading ? (
+                projects.map((project) => (
+                  <Link to={`/projects/${project._id}`} key={project._id}>
+                    <ProjectCard title={project.name} status="In Progress" />
+                  </Link>
+                ))
+              ) : (
+                <p>Loading projects...</p>
+              )}
             </div>
           </div>
         )}

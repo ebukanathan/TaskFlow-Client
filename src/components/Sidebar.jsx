@@ -2,7 +2,7 @@ import React from "react";
 
 const Sidebar = ({ activeTab, setActiveTab, handleLogout }) => {
   return (
-    <aside className="relative not-last:w-64  bg-slate-900 text-white flex flex-col p-6 ">
+    <aside className="fixed left-0 top-0 min-h-screen not-last:w-64  bg-slate-900 text-white flex flex-col p-6 ">
       <h1 className="text-2xl font-bold mb-10">TaskFlow</h1>
 
       <nav className="space-y-3">

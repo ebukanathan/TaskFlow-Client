@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getItemByIdFromDb } from "../util/calls";
 import AddTaskModal from "../components/AddTask";
+import TaskCard from "../components/TaskCard";
 
 function ProjectPage() {
   const [project, setProject] = useState(null);
@@ -61,6 +62,20 @@ function ProjectPage() {
           </ul>
         </div> */}
       </div>
+
+      {project?.tasks && project.tasks.length > 0 ? (
+        project.tasks.map((task, index) => (
+          <TaskCard
+            key={index}
+            title={task.title}
+            due={task.dueDate}
+            status={task.status}
+          />
+        ))
+      ) : (
+        <p className="text-gray-500">No tasks available for this project.</p>
+      )}
+
       {onClose && <AddTaskModal onClose={() => setOnClose(false)} id={id} />}
     </div>
   );

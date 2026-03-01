@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import api from "../api/axios";
 import { postItemByIdToDb } from "../util/calls";
 
-function AddTaskModal({ onClose,id }) {
+function AddTaskModal({ onClose, id }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [status, setStatus] = useState("To Do");
-  const [priority, setPriority] = useState("Medium");
+  const [status, setStatus] = useState("");
+  const [priority, setPriority] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

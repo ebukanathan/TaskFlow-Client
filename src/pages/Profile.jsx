@@ -13,10 +13,10 @@ function Profile() {
 
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    // await logout();
-    navigate("/");
-  };
+  // const handleLogout = async () => {
+  //   // await logout();
+  //   navigate("/");
+  // };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -46,12 +46,19 @@ function Profile() {
 
   return (
     <div className="flex min-h-screen ">
-      <Sidebar
+      {/* <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         handleLogout={handleLogout}
-      />
-      <MainBoard activeTab={activeTab} user={user} />
+      /> */}
+      {loading ? (
+        <h4>
+          <h2>Welcome to your profile, {user.name}!</h2>
+          <MainBoard activeTab={activeTab} user={user} />
+        </h4>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 }
