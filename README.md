@@ -81,6 +81,9 @@ src/
 
 ## Screenshots
 ![Project Screenshot](src/assets/signup.png)
+![Project Screenshot](src/assets/login.png)
+![Project Screenshot](src/assets/profile.png)
+![Project Screenshot](src/assets/proj dash.png)
 
 ## Future Improvements
 
