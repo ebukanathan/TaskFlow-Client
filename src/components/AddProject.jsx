@@ -1,29 +1,20 @@
 import { useState } from "react";
-import api from "../api/axios.js";
+import { useCreateProject } from "../features/project/useCreateProject";
+// import api from "../api/axios.js";
 
 const AddProjectModal = ({ isOpen, onClose }) => {
   const [name, setName] = useState("");
   //   const [description, setDescription] = useState("");
+
+  const projectMutation = useCreateProject();
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await api.post("/projects", { name });
-
-      if (!response) {
-        console.log("no data");
-      }
-      console.log(response.data);
-
-      setName("");
-
-      onClose();
-    } catch (error) {
-      console.log(error);
-    }
+    projectMutation.mutate(name);
+    onClose();
   };
 
   return (

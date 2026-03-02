@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import api from "../api/axios";
 import { postItemByIdToDb } from "../util/calls";
 
+import { useCreateTask } from "../features/tasks/useCreateTask";
+
 function AddTaskModal({ onClose, id }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -9,27 +11,39 @@ function AddTaskModal({ onClose, id }) {
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
 
+  const taskMutation = useCreateTask(id);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you would typically send the new task data to your backend API
-    try {
-      const newTask = {
-        title,
-        description,
-        dueDate,
-        status,
-        priority,
-      };
-      const response = await postItemByIdToDb("/tasks", id, newTask);
-      if (response) {
-        console.log("Task added successfully:", response.data);
-        onClose();
-      } else {
-        console.error("Failed to add task");
-      }
-    } catch (error) {
-      console.error("Error adding task:", error);
-    }
+
+    // const newTask = {
+    //   title,
+    //   description,
+    //   dueDate,
+    //   status,
+    //   priority,
+    // };
+    // const response = await postItemByIdToDb("/tasks", id, newTask);
+    // if (response) {
+    //   console.log("Task added successfully:", response.data);
+    //   onClose();
+    // } else {
+    //   console.error("Failed to add task");
+    // }
+
+    taskMutation.mutate({
+      title,
+      description,
+      dueDate,
+      status,
+      priority,
+    });
+
+    (setTitle(""), setDescription(""));
+    setDueDate("");
+    setPriority("");
+    setStatus("");
   };
 
   return (

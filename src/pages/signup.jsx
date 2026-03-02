@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCreateUser } from "../features/auth/useCreateUser";
 
 function Signup() {
   const [name, setName] = useState();
@@ -9,36 +10,44 @@ function Signup() {
   const [role, setRole] = useState("user");
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3000/auth/register",
+  //       {
+  //         email,
+  //         password,
+  //         name,
+  //         role,
+  //       },
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //         withCredentials: true,
+  //       },
+  //     );
+  //     if (!response) {
+  //       console.log("no data");
+  //     }
+
+  //     console.log(response.data);
+  //     setLoading(false);
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const SignupMutation = useCreateUser();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/register",
-        {
-          email,
-          password,
-          name,
-          role,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        },
-      );
-      if (!response) {
-        console.log("no data");
-      }
-
-      console.log(response.data);
-      setLoading(false);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    const details = { email, password, name, role };
+    SignupMutation.mutate(details);
   };
 
   return (

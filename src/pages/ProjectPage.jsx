@@ -3,25 +3,30 @@ import { useParams } from "react-router-dom";
 import { getItemByIdFromDb } from "../util/calls";
 import AddTaskModal from "../components/AddTask";
 import TaskCard from "../components/TaskCard";
+import { useTasks } from "../features/tasks/useTask";
 
 function ProjectPage() {
   const [project, setProject] = useState(null);
   const [onClose, setOnClose] = useState(true);
 
   const { id } = useParams();
+  console.log(id);
 
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        const projectData = await getItemByIdFromDb("/projects", id);
-        setProject(projectData);
-      } catch (error) {
-        console.error("Error fetching project:", error);
-      }
-    };
+  const { data } = useTasks(id);
+  console.log("data from projectpage:", data);
 
-    fetchProject();
-  }, [id]);
+  // useEffect(() => {
+  //   const fetchProject = async () => {
+  //     try {
+  //       const projectData = await getItemByIdFromDb("/projects", id);
+  //       setProject(projectData);
+  //     } catch (error) {
+  //       console.error("Error fetching project:", error);
+  //     }
+  //   };
+
+  //   fetchProject();
+  // }, [id]);
 
   console.log(project, "this is the project data");
   return (

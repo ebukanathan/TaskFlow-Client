@@ -1,39 +1,47 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+//import { Link, useNavigate } from "react-router-dom";
 
 //import axios from "axios";
-import api from "../api/axios.js";
+// import api from "../api/axios.js";
+import { useLogin } from "../features/auth/useLogin";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError(null);
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await api.post("/auth/login", {
+  //       email,
+  //       password,
+  //     });
+
+  //     console.log(response.data);
+
+  //     //decide where to navigate based on role
+  //     if (response.data.user.role === "admin") {
+  //       navigate("/dashboard");
+  //     } else {
+  //       navigate("/profile");
+  //     }
+  //   } catch (error) {
+  //     console.log({ err: error });
+  //   }
+  // };
+
+  const loginMutation = useLogin();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    try {
-      const response = await api.post("/auth/login", {
-        email,
-        password,
-      });
-
-      console.log(response.data);
-
-      //decide where to navigate based on role
-      if (response.data.user.role === "admin") {
-        navigate("/dashboard");
-      } else {
-        navigate("/profile");
-      }
-    } catch (error) {
-      console.log({ err: error });
-    }
+    loginMutation.mutate({ email, password });
   };
 
   return (
@@ -67,9 +75,10 @@ function Login() {
           </div>
           <button
             type="submit"
+            disabled={loginMutation.isLoading}
             className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
           >
-            Login
+            {loginMutation.isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="text-md font-normal mt-5 text-center">

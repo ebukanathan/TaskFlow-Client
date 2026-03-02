@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ activeTab, setActiveTab, handleLogout }) => {
   return (
@@ -7,7 +8,6 @@ const Sidebar = ({ activeTab, setActiveTab, handleLogout }) => {
 
       <nav className="space-y-3">
         <button
-          onClick={() => setActiveTab("projects")}
           className={`w-full text-left px-4 py-2 rounded-lg transition
             ${
               activeTab === "projects"
@@ -16,7 +16,7 @@ const Sidebar = ({ activeTab, setActiveTab, handleLogout }) => {
             }
           `}
         >
-          📁 Projects
+          <Link to="/profile">📁 Projects</Link>
         </button>
 
         <button

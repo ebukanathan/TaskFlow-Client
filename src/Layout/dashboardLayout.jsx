@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "./Sidebar.jsx";
-import NameBar from "./NameBar.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import NameBar from "../components/NameBar.jsx";
 import { Outlet } from "react-router-dom";
 
-function Layout() {
+function DashboardLayout() {
   return (
     <div className="flex min-h-screen ">
       <div className="w-64 bg-gray-800 text-white">
@@ -19,4 +19,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default DashboardLayout;
