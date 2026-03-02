@@ -80,7 +80,7 @@ src/
 6. Tasks appear instantly thanks to Tanstack Query optimistic updates
 
 ## Screenshots
-![Project Screenshot](assets/signup.png)
+![Project Screenshot](src/assets/signup.png)
 
 ## Future Improvements
 
