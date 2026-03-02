@@ -1,16 +1,93 @@
-# React + Vite
+## TaskFlow – Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Full-Stack Task Management App built with React, Node.js, Express, Prisma, and PostgreSQL.
+A project demonstrating end-to-end web development, role-based authentication, and project/task management functionality.
 
-Currently, two official plugins are available:
+Table of content
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+TaskFlow is a web application that allows users to manage projects and tasks efficiently.
+Users can create projects, add tasks, assign priorities and due dates, and track progress in real-time.
 
-## Expanding the ESLint configuration
+This project was built solo, demonstrating the ability to handle frontend, backend, and database integration end-to-end.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- User Authentication: Secure login/signup with role-based access
+
+- Project Management: Create, view, and manage multiple projects
+
+- Task Management: Add tasks to projects, set priorities, due dates, and statuses
+
+- Real-Time Updates: Frontend uses React Query (TanStack) to update UI immediately
+
+- Optimistic Updates: Tasks appear instantly on creation
+
+- Responsive Design: Works well on mobile and desktop
+
+- Secure Backend: Express + Prisma + PostgreSQL with session management
+
+
+## Tech Stack
+
+| Layer                 | Technology                                        |
+| --------------------- | ------------------------------------------------- |
+| Frontend              | React, React Router, Tailwind CSS, TanStack Query |
+| Backend               | Node.js, Express, Prisma                          |
+| Database              | PostgreSQL                                        |
+| Authentication        | Session-based, role-based access control          |
+| Hosting (Recommended) | Railway / Render (free tier)                      |
+
+Backend Structure
+```
+
+src/
+├─ controllers/     # Request handlers (auth, project, task)
+├─ routes/          # API routes
+├─ middleware/      # Auth & error handling middleware
+├─ libs/            # Prisma client abstraction
+├─ utils/           # Helper functions
+└─ server.ts        # App entry point
+
+```
+Frontend structure:
+```
+src/
+├─ features/
+│  ├─ auth/         # Login, signup hooks & components
+│  ├─ projects/     # Project and task hooks/components
+│  └─ tasks/
+├─ components/      # Reusable components
+├─ pages/           # Routes (Login, Dashboard, Profile)
+├─ App.jsx
+└─ api.js           # Axios instance for backend requests
+```
+
+### Usage
+
+1. Signup or login as a user
+
+2. Create a new project
+
+3. Add tasks under each project
+
+4. Set priority, due date, and status
+
+5. View tasks under each project in dashboard
+
+6. Tasks appear instantly thanks to Tanstack Query optimistic updates
+
+## Screenshots
+![Project Screenshot](assets/signup.png)
+
+## Future Improvements
+
+- Add task assignment to multiple users
+
+- Notifications for upcoming due dates
+
+- Drag-and-drop task reordering
+
+- Real-time updates via WebSockets
